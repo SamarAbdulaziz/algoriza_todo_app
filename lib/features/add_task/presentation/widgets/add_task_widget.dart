@@ -350,10 +350,10 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     Navigator.pop(context);
                     cubit.getTodoAppDatabase();
                   }
-                  cubit.notification.displayNotification(
-                    title:cubit.titleController.text,
-                    subtitle:'At${cubit.dateController.text}',
-                  );
+                  // cubit.notification.displayNotification(
+                  //   title:cubit.titleController.text,
+                  //   subtitle:'At${cubit.dateController.text}',
+                  // );
                   //cubit.notification.scheduledNotification();
 
                 },
