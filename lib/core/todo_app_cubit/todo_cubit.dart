@@ -87,10 +87,12 @@ class TodoCubit extends Cubit<TodoStates> {
         dateController.clear();
         startTimeController.clear();
         endTimeController.clear();
-        isCompleted = false;
-        isFavorite = false;
         remindController.clear();
         repeatController.clear();
+        isCompleted = false;
+        isFavorite = false;
+        print('*********************************$isCompleted');
+
       }).catchError((error) {
         debugPrint(error.toString());
       });

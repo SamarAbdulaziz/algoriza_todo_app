@@ -50,7 +50,9 @@ class TaskItem extends StatelessWidget {
                         cubit.isCompleted = true;
                         debugPrint('${cubit.isCompleted}');
                         cubit.updateCompletedDatabase(
-                            id: taskItem['id'], isCompleted: cubit.isCompleted);
+                            id: taskItem['id'],
+                          isCompleted: cubit.isCompleted,
+                        );
                       },
                       child: const Text('Completed'),
                     ),
@@ -59,7 +61,9 @@ class TaskItem extends StatelessWidget {
                         cubit.isCompleted = false;
                         debugPrint('${cubit.isCompleted}');
                         cubit.updateCompletedDatabase(
-                            id: taskItem['id'], isCompleted: cubit.isCompleted);
+                            id: taskItem['id'],
+                            isCompleted: cubit.isCompleted,
+                        );
                       },
                       child: const Text('Uncompleted'),
                     ),
