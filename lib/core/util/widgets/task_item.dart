@@ -111,6 +111,22 @@ class TaskItem extends StatelessWidget {
                       onTap: () {
                         //todo delete item
                         cubit.deleteRowTodoAppDatabase(id: taskItem['id']);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'Task Deleted',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                            ),
+                            backgroundColor: Colors.red,
+                            behavior: SnackBarBehavior.floating,
+                            margin: const EdgeInsets.only(bottom: 100.0),
+                          ),
+                        );
                       },
                       child: const Text('Delete'),
                     ),

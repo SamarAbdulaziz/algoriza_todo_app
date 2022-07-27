@@ -52,8 +52,8 @@ class TodoCubit extends Cubit<TodoStates> {
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   TextEditingController remindController = TextEditingController();
-  int taskColor = 0;
   TextEditingController repeatController = TextEditingController();
+  int taskColor = 0;
   bool isCompleted = false;
   bool isFavorite = false;
 
@@ -87,6 +87,8 @@ class TodoCubit extends Cubit<TodoStates> {
         dateController.clear();
         startTimeController.clear();
         endTimeController.clear();
+        isCompleted = false;
+        isFavorite = false;
         remindController.clear();
         repeatController.clear();
       }).catchError((error) {
@@ -182,6 +184,7 @@ void updateFavoriteDatabase({
     '1 hour before',
     '30 minutes before',
     '10 minutes before',
+    'On Time',
   ];
 
   void setReminder(String value) {
