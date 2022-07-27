@@ -19,7 +19,7 @@ class ScheduleTaskItem extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
           side: MaterialStateBorderSide.resolveWith(
-                (states) => BorderSide(
+                (states) => const BorderSide(
                     width: 1.0,
                     color: Colors.white,
                 ),
@@ -37,14 +37,14 @@ class ScheduleTaskItem extends StatelessWidget {
           child: CheckboxListTile(
             title: Text(
               taskItem['startTime'],
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white
               ),
             ),
             activeColor: taskColorsList[ taskItem['color']],
             subtitle: Text(
               taskItem['title'],
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white),
             ),
             onChanged: (value) {

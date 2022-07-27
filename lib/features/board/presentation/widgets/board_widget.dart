@@ -44,7 +44,7 @@ class BoardWidget extends StatelessWidget {
           color: Colors.black12,
           thickness: 2.0,
         ),
-        Expanded(
+        const Expanded(
           child: TabBarView(
             children: [
               AllTasksSection(),

@@ -3,7 +3,7 @@ import 'package:algoriza_todo_app/core/util/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TaskItem extends StatelessWidget {
-  TaskItem({
+  const TaskItem({
     Key? key,
     required this.taskItem,
   }) : super(key: key);
