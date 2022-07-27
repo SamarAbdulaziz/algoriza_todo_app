@@ -33,4 +33,4 @@ class ReminderState extends TodoStates {}
 
 class RepeatState extends TodoStates {}
 
-class ChangeColorInAddTaskScreen extends TodoStates {}
+class ChangeColorInAddTaskState extends TodoStates {}

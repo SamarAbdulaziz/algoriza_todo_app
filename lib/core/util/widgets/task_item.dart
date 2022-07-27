@@ -72,7 +72,8 @@ class TaskItem extends StatelessWidget {
                         cubit.isFavorite = !cubit.isFavorite;
                         debugPrint('favorite: ${cubit.isFavorite}');
                         cubit.updateFavoriteDatabase(
-                            id: taskItem['id'], isFavorite: cubit.isFavorite);
+                            id: taskItem['id'],
+                            isFavorite: cubit.isFavorite);
                         cubit.isFavorite
                             ? ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

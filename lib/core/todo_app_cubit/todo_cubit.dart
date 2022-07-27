@@ -91,7 +91,6 @@ class TodoCubit extends Cubit<TodoStates> {
         repeatController.clear();
         isCompleted = false;
         isFavorite = false;
-        print('*********************************$isCompleted');
 
       }).catchError((error) {
         debugPrint(error.toString());
@@ -104,6 +103,8 @@ class TodoCubit extends Cubit<TodoStates> {
 
   void getTodoAppDatabase() async {
     emit(GetDatabaseLoadingState());
+    isCompleted = false;
+    isFavorite = false;
     await database.rawQuery('SELECT * FROM $tableName').then((value) {
       allTasks = value;
       debugPrint('$allTasks');
@@ -164,9 +165,6 @@ void updateFavoriteDatabase({
     selectedDay = DateFormat('EEEEE').format(date);
     selectedDate = DateFormat.yMMMd().format(date); //jul 24,2022
     convertedSelectedDate = DateFormat.yMd().format(date);
-    // debugPrint('$selectedDay');
-    // debugPrint('$selectedDate');
-    // debugPrint('$convertedSelectedDate');
     emit(DayChangedState());
   }
 
@@ -206,6 +204,10 @@ void updateFavoriteDatabase({
     emit(RepeatState());
   }
 
+  void changeColorIndex(int value){
+    taskColor=value;
+    emit(ChangeColorInAddTaskState());
+  }
   void saveTaskColor(int val) {
     switch(val){
       case 0:

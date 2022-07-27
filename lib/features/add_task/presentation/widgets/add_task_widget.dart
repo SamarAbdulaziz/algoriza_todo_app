@@ -5,28 +5,11 @@ import 'package:algoriza_todo_app/core/util/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class AddTaskWidget extends StatefulWidget {
-  AddTaskWidget({Key? key}) : super(key: key);
-
-  @override
-  State<AddTaskWidget> createState() => _AddTaskWidgetState();
-}
-
-class _AddTaskWidgetState extends State<AddTaskWidget> {
+class AddTaskWidget extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
-
-  int val = 0;
 
   var notification;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   notification = Notifications();
-  //   notification.initializeNotification();
-  //   notification.requestIOSPermissions();
-  // }
   DateTime startTime = DateTime.now();
   DateTime endTime = DateTime.now();
 
@@ -90,7 +73,6 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     lastDate: DateTime(DateTime.now().year + 5),
                   ).then((value) {
                     cubit.dateController.text = DateFormat.yMd().format(value!);
-                    //yMd..ymm
                   });
                 },
                 hintText: 'Task Date',
@@ -283,12 +265,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   ),
                   Radio(
                     value: 0,
-                    groupValue: val,
+                    groupValue: cubit.taskColor,
                     onChanged: (int? value) {
-                      setState(() {
-                        val = value!;
-                        //  cubit.changeColorInAddTaskScreen(val);
-                      });
+                      cubit.changeColorIndex(value!);
                       cubit.saveTaskColor(0);
                     },
                     fillColor: MaterialStateProperty.all(
@@ -297,12 +276,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   ),
                   Radio(
                     value: 1,
-                    groupValue: val,
+                    groupValue: cubit.taskColor,
                     onChanged: (int? value) {
-                      setState(() {
-                        val = value!;
-                        //  cubit.changeColorInAddTaskScreen(val);
-                      });
+                      cubit.changeColorIndex(value!);
                       cubit.saveTaskColor(1);
                     },
                     fillColor: MaterialStateProperty.all(
@@ -311,12 +287,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   ),
                   Radio(
                     value: 2,
-                    groupValue: val,
+                    groupValue: cubit.taskColor,
                     onChanged: (int? value) {
-                      setState(() {
-                        val = value!;
-                        //cubit.changeColorInAddTaskScreen(val);
-                      });
+                      cubit.changeColorIndex(value!);
                       cubit.saveTaskColor(2);
                     },
                     fillColor: MaterialStateProperty.all(
@@ -325,12 +298,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   ),
                   Radio(
                     value: 3,
-                    groupValue: val,
+                    groupValue: cubit.taskColor,
                     onChanged: (int? value) {
-                      setState(() {
-                        val = value!;
-                        //  cubit.changeColorInAddTaskScreen(val);
-                      });
+                      cubit.changeColorIndex(value!);
                       cubit.saveTaskColor(3);
                     },
                     fillColor: MaterialStateProperty.all(
@@ -350,11 +320,11 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     Navigator.pop(context);
                     cubit.getTodoAppDatabase();
                   }
-                  // cubit.notification.displayNotification(
-                  //   title:cubit.titleController.text,
-                  //   subtitle:'At${cubit.dateController.text}',
-                  // );
-                  //cubit.notification.scheduledNotification();
+                  cubit.notification.displayNotification(
+                    title: cubit.titleController.text,
+                    subtitle: 'At${cubit.dateController.text}',
+                  );
+                 // cubit.notification.scheduledNotification();
 
                 },
               )
