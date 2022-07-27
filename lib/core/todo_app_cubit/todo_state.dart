@@ -32,4 +32,5 @@ class CheckDateToShowTasksOfThatDateState extends TodoStates {}
 class ReminderState extends TodoStates {}
 
 class RepeatState extends TodoStates {}
+
 class ChangeColorInAddTaskScreen extends TodoStates {}

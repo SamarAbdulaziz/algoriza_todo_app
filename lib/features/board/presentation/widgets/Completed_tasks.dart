@@ -16,14 +16,7 @@ class CompletedTasksSection extends StatelessWidget {
       builder: (context, state) {
         return ListView.builder(
           itemBuilder: (context, index) {
-            DateTime date =
-            DateFormat.jm().parse(cubit.allTasks[index]['startTime']);
-            var myTime = DateFormat("HH:mm").format(date);
-            cubit.notification.scheduledNotification(
-              int.parse(myTime.toString().split(":")[0]),
-              int.parse(myTime.toString().split(":")[1]),
-              cubit.allTasks[index],
-            );
+
             if (cubit.allTasks[index]['completed'] == 'true') {
               return TaskItem(
                 taskItem: cubit.allTasks[index],

@@ -11,7 +11,6 @@ class ScheduleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<TodoCubit, TodoStates>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         return Scaffold(
@@ -20,7 +19,7 @@ class ScheduleScreen extends StatelessWidget {
             title: 'Schedule',
             context: context,
           ),
-          body: ScheduleWidget(),
+          body: const ScheduleWidget(),
         );
       },
     );

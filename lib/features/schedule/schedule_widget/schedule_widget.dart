@@ -53,14 +53,18 @@ class ScheduleWidget extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             itemBuilder: (context, index) {
+
               DateTime date =
-                  DateFormat.jm().parse(cubit.allTasks[index]['startTime']);
+              DateFormat.jm().parse(cubit.allTasks[index]['startTime']);
               var myTime = DateFormat("HH:mm").format(date);
               cubit.notification.scheduledNotification(
                 int.parse(myTime.toString().split(":")[0]),
                 int.parse(myTime.toString().split(":")[1]),
-                  cubit.allTasks[index],
+                cubit.allTasks[index],
               );
+
+
+
               if (cubit.allTasks[index]['repeat'] == 'Daily') {
                 return ScheduleTaskItem(
                   taskItem: cubit.allTasks[index],
@@ -81,25 +85,4 @@ class ScheduleWidget extends StatelessWidget {
       ],
     );
   }
-} // print('******************${TodoCubit.get(context).allTasks[index]}');//listoftasks
-// print('the task $index in database ===>${TodoCubit.get(context).allTasks[index]['date']}');
-//  print('the selected date $index===>${TodoCubit.get(context).convertedSelectedDate}');
-
-// // debugPrint(cubit.checkDateToShowTasksOfThatDate(index).toString());
-// // debugPrint(cubit.checkDateToShowTasksOfThatDate(index).toString());
-// //cubit.checkDateToShowTasksOfThatDate(index)
-// print('******************${TodoCubit.get(context).allTasks[index]}');
-// print('the date of the task ${TodoCubit.get(context).allTasks[index]['date']}');
-//
-// if (TodoCubit.get(context).allTasks[index]['date'] ==
-// DateFormat.yMd().format(selectedDate2))
-// ScheduleTaskItem(
-// taskItem: cubit.allTasks[index],
-// );
-// else
-// Container(
-// color: Colors.red,
-// );
-// return ScheduleTaskItem(
-// taskItem: cubit.allTasks[index],
-// );
+}

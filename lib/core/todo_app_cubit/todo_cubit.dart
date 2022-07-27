@@ -231,38 +231,3 @@ void updateFavoriteDatabase({
     notification.requestIOSPermissions();
   }
 }
-// List<Map> completedTasks = [];
-// List<Map> unCompletedTasks = [];
-// List<Map> favoriteTasks = [];
-// allTasks.forEach((element) {
-// if (element['completed'] == 'true') {
-// //debugPrint('${element['completed']}');
-// completedTasks.add(element);
-// } else {
-// unCompletedTasks.add(element);
-// }
-// if (element['favorite'] == 'true') {
-// favoriteTasks.add(element);
-// }
-// });
-// bool boxChecked = false;
-//
-// void isBoxChecked(bool? value) {
-//   boxChecked = value!;
-//   emit(BoxCheckedState());
-// }
-//it didnt work so i used Statefullwidget
-//   int val = 0;
-//
-//   void changeColorInAddTaskScreen(int? value) {
-//     val = value!;
-//     emit(ChangeColorInAddTaskScreen());
-//     print(val.toString());
-//   }
-// void deleteTableTodoAppDatabase() async {
-//   await database.delete('$tableName').then((value) {
-//     debugPrint('table deleted');
-//     emit(DeleteDataState());
-//     getTodoAppDatabase();
-//   });
-// }

@@ -16,8 +16,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
   final formKey = GlobalKey<FormState>();
 
   int val = 0;
-  // var notification;
-  //
+
+  var notification;
+
   // @override
   // void initState() {
   //   // TODO: implement initState
@@ -26,12 +27,12 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
   //   notification.initializeNotification();
   //   notification.requestIOSPermissions();
   // }
+  DateTime startTime = DateTime.now();
+  DateTime endTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     var cubit = TodoCubit.get(context);
-    // DateTime start = DateTime.parse(cubit.startTimeController.text);
-    // DateTime end = DateTime.parse(cubit.endTimeController.text);
 
     return Form(
       key: formKey,
@@ -118,13 +119,6 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                         ),
                         MyTextFormField(
                           controller: cubit.startTimeController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Start time must not empty';
-                            }
-                          },
-                          hintText: '11:00 AM',
-                          suffixIcon: const Icon(Icons.access_time_outlined),
                           onTap: () {
                             showTimePicker(
                               context: context,
@@ -132,9 +126,20 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                             ).then((value) {
                               cubit.startTimeController.text =
                                   value!.format(context);
-
                             });
+                            // start =
+                            //     DateTime.parse(cubit.startTimeController.text);
+                            startTime = DateFormat("hh:mm a")
+                                .parse(cubit.startTimeController.text);
+
                           },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Start time must not empty';
+                            }
+                          },
+                          hintText: '11:00 AM',
+                          suffixIcon: const Icon(Icons.access_time_outlined),
                         ),
                       ],
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,16 +163,6 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                         ),
                         MyTextFormField(
                           controller: cubit.endTimeController,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'End Time must not empty';
-                            }
-                            // else if (start.isAfter(end)) {
-                            //   return 'End Time must be after start time';
-                            // }
-                          },
-                          hintText: '4:00 PM',
-                          suffixIcon: const Icon(Icons.access_time_outlined),
                           onTap: () {
                             showTimePicker(
                               context: context,
@@ -175,8 +170,22 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                             ).then((value) {
                               cubit.endTimeController.text =
                                   value!.format(context);
+                              // end =
+                              //     DateTime.parse(cubit.endTimeController.text);
+                              endTime = DateFormat("hh:mm a")
+                                  .parse(cubit.endTimeController.text);
                             });
                           },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'End Time must not empty';
+                            }
+                            if (endTime.hour <= startTime.hour&&endTime.minute<=startTime.minute) {
+                              return 'End time must be after start time';
+                            }
+                          },
+                          hintText: '4:00 PM',
+                          suffixIcon: const Icon(Icons.access_time_outlined),
                         ),
                       ],
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -342,8 +351,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     cubit.getTodoAppDatabase();
                   }
                   cubit.notification.displayNotification(
-                    title:"Hello Notification",
-                    subtitle:"Welcome to Flutter",
+                    title:cubit.titleController.text,
+                    subtitle:'At${cubit.dateController.text}',
                   );
                   //cubit.notification.scheduledNotification();
 
