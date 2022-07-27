@@ -87,8 +87,8 @@ class TaskItem extends StatelessWidget {
                                 ),
                               )
                             : ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: const Padding(
+                                const SnackBar(
+                                  content: Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
                                       'Removed from favorite',
@@ -99,7 +99,7 @@ class TaskItem extends StatelessWidget {
                                   ),
                                   backgroundColor: Colors.red,
                                   behavior: SnackBarBehavior.floating,
-                                  margin: const EdgeInsets.only(
+                                  margin: EdgeInsets.only(
                                     bottom: 100.0,
                                   ),
                                 ),
