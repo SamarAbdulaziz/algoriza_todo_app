@@ -138,7 +138,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                               return 'Start time must not empty';
                             }
                           },
-                          hintText: '11:00 AM',
+                          hintText: '12:00 AM',
                           suffixIcon: const Icon(Icons.access_time_outlined),
                         ),
                       ],
@@ -184,7 +184,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                               return 'End time must be after start time';
                             }
                           },
-                          hintText: '4:00 PM',
+                          hintText: '12:00 PM',
                           suffixIcon: const Icon(Icons.access_time_outlined),
                         ),
                       ],
@@ -216,7 +216,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   }
                 },
                 onTap: () {},
-                hintText: '5 minutes early',
+                hintText: '1 day before',
                 suffixIcon: DropdownButton(
                   icon: const Icon(Icons.keyboard_arrow_down_rounded),
                   underline: Container(),
@@ -350,10 +350,10 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     Navigator.pop(context);
                     cubit.getTodoAppDatabase();
                   }
-                  cubit.notification.displayNotification(
-                    title:cubit.titleController.text,
-                    subtitle:'At${cubit.dateController.text}',
-                  );
+                  // cubit.notification.displayNotification(
+                  //   title:cubit.titleController.text,
+                  //   subtitle:'At${cubit.dateController.text}',
+                  // );
                   //cubit.notification.scheduledNotification();
 
                 },

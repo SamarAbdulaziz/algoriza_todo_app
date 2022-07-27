@@ -1,5 +1,6 @@
 import 'package:algoriza_todo_app/core/todo_app_cubit/todo_cubit.dart';
 import 'package:algoriza_todo_app/core/util/app_colors/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TaskItem extends StatelessWidget {
@@ -11,6 +12,7 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = TodoCubit.get(context);
     return Theme(
       data: Theme.of(context).copyWith(
         checkboxTheme: Theme.of(context).checkboxTheme.copyWith(
@@ -22,8 +24,8 @@ class TaskItem extends StatelessWidget {
                   width: 1.0,
                   color: taskColorsList[taskItem['color']],
                 ),
-              ),
-            ),
+          ),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -33,55 +35,84 @@ class TaskItem extends StatelessWidget {
           ),
           activeColor: taskColorsList[taskItem['color']],
           onChanged: (value) {
-            TodoCubit.get(context).isCompleted = value!;
-            TodoCubit.get(context).updateCompletedDatabase(
-                id: taskItem['id'],
-                isCompleted: TodoCubit.get(context).isCompleted);
+            cubit.isCompleted = value!;
+            cubit.updateCompletedDatabase(
+                id: taskItem['id'], isCompleted: cubit.isCompleted);
             debugPrint('$value');
           },
           value:taskItem['completed']=='true'?true:false ,
           controlAffinity: ListTileControlAffinity.leading,
           secondary: PopupMenuButton(
-              itemBuilder: (context) => [
+              itemBuilder: (context) =>
+              [
                     PopupMenuItem(
                       onTap: () {
-                        TodoCubit.get(context).isCompleted = true;
-                        debugPrint('${TodoCubit.get(context).isCompleted}');
-                        TodoCubit.get(context).updateCompletedDatabase(
-                            id: taskItem['id'],
-                            isCompleted: TodoCubit.get(context).isCompleted);
+                        cubit.isCompleted = true;
+                        debugPrint('${cubit.isCompleted}');
+                        cubit.updateCompletedDatabase(
+                            id: taskItem['id'], isCompleted: cubit.isCompleted);
                       },
-                      child: Text('Completed'),
+                      child: const Text('Completed'),
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        TodoCubit.get(context).isCompleted = false;
-                        debugPrint('${TodoCubit.get(context).isCompleted}');
-                        TodoCubit.get(context).updateCompletedDatabase(
-                            id: taskItem['id'],
-                            isCompleted: TodoCubit.get(context).isCompleted);
+                        cubit.isCompleted = false;
+                        debugPrint('${cubit.isCompleted}');
+                        cubit.updateCompletedDatabase(
+                            id: taskItem['id'], isCompleted: cubit.isCompleted);
                       },
-                      child: Text('Uncompleted'),
+                      child: const Text('Uncompleted'),
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        TodoCubit.get(context).isFavorite =
-                            !TodoCubit.get(context).isFavorite;
-                        debugPrint(
-                            'favorite: ${TodoCubit.get(context).isFavorite}');
-                        TodoCubit.get(context).updateFavoriteDatabase(
-                            id: taskItem['id'],
-                            isFavorite: TodoCubit.get(context).isFavorite);
+                        cubit.isFavorite = !cubit.isFavorite;
+                        debugPrint('favorite: ${cubit.isFavorite}');
+                        cubit.updateFavoriteDatabase(
+                            id: taskItem['id'], isFavorite: cubit.isFavorite);
+                        cubit.isFavorite
+                            ? ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Added to favorite',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ),
+                                  backgroundColor: appColor,
+                                  behavior: SnackBarBehavior.floating,
+                                  margin: const EdgeInsets.only(bottom: 100.0),
+                                ),
+                              )
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Removed from favorite',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.red,
+                                  behavior: SnackBarBehavior.floating,
+                                  margin: const EdgeInsets.only(
+                                    bottom: 100.0,
+                                  ),
+                                ),
+                              );
                       },
-                      child: Text('Favorite'),
+                      child: const Text('Favorite'),
                     ),
                     PopupMenuItem(
                       onTap: () {
                         //todo delete item
-                        TodoCubit.get(context)
-                            .deleteRowTodoAppDatabase(id: taskItem['id']);
+                        cubit.deleteRowTodoAppDatabase(id: taskItem['id']);
                       },
-                      child: Text('Delete'),
+                      child: const Text('Delete'),
                     ),
                   ]),
         ),

@@ -167,24 +167,21 @@ void updateFavoriteDatabase({
   }
 
   bool checkDateToShowTasksOfThatDate(int index) {
-    // changeTheDay();
     var theDateOfTheTask = allTasks[index]['date'];
     if (theDateOfTheTask == convertedSelectedDate) {
       emit(CheckDateToShowTasksOfThatDateState());
       return true;
     } else {
-      // debugPrint('the date of the task ==== $theDateOfTheTask');
-      // debugPrint('the converted selected date ==== $convertedSelectedDate');
       emit(CheckDateToShowTasksOfThatDateState());
       return false;
     }
   }
 
   List<String> remindList = [
-    '5 minutes early',
-    '10 minutes early',
-    '15 minutes early',
-    '20 minutes early',
+    '1 day before',
+    '1 hour before',
+    '30 minutes before',
+    '10 minutes before',
   ];
 
   void setReminder(String value) {
