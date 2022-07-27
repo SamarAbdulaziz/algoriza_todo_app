@@ -17,25 +17,22 @@ class MyApp extends StatelessWidget {
       create: (context) => TodoCubit()..createTodoAppDatabase()..initNotifications(),
       child: BlocConsumer<TodoCubit, TodoStates>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            // theme: ThemeData(
-            //     appBarTheme: AppBarTheme(
-            //         systemOverlayStyle: SystemUiOverlayStyle(
-            //           statusBarColor: Colors.white,
-            //         ),
-            //     ),
-            //
-            // ),
-            home: BoardScreen(),
+            theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.white,
+                  statusBarIconBrightness: Brightness.dark
+                ),
+              ),
+            ),
+            home: const BoardScreen(),
           );
         },
       ),
     );
   }
-
-
 }

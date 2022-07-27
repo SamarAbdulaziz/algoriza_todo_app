@@ -15,7 +15,9 @@ class GetDatabaseLoadingState extends TodoStates {}
 
 class GetDataState extends TodoStates {}
 
-class DataUpdatedState extends TodoStates {}
+class DataUpdatedCompleteFieldState extends TodoStates {}
+
+class DataUpdatedFavoriteFieldState extends TodoStates {}
 
 class RowDeletedState extends TodoStates {}
 

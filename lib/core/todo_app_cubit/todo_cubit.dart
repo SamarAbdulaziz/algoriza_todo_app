@@ -52,7 +52,7 @@ class TodoCubit extends Cubit<TodoStates> {
   TextEditingController startTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   TextEditingController remindController = TextEditingController();
-  int taskColor = 0; //=taskColors[0].toString();
+  int taskColor = 0;
   TextEditingController repeatController = TextEditingController();
   bool isCompleted = false;
   bool isFavorite = false;
@@ -83,12 +83,12 @@ class TodoCubit extends Cubit<TodoStates> {
           .then((value) {
         debugPrint('Data inserted');
         emit(DataInsertedState());
-        titleController.text='';
-        dateController.text='';
-        startTimeController.text='';
-        endTimeController.text='';
-        remindController.text='';
-        repeatController.text='';
+        titleController.clear();
+        dateController.clear();
+        startTimeController.clear();
+        endTimeController.clear();
+        remindController.clear();
+        repeatController.clear();
       }).catchError((error) {
         debugPrint(error.toString());
       });
@@ -96,57 +96,52 @@ class TodoCubit extends Cubit<TodoStates> {
   }
 
   List<Map> allTasks = [];
-  List<Map> completedTasks = [];
-  List<Map> unCompletedTasks = [];
-  List<Map> favoriteTasks = [];
+
 
   void getTodoAppDatabase() async {
-    completedTasks = [];
-    unCompletedTasks = [];
-    favoriteTasks = [];
     emit(GetDatabaseLoadingState());
     await database.rawQuery('SELECT * FROM $tableName').then((value) {
       allTasks = value;
       debugPrint('$allTasks');
-      allTasks.forEach((element) {
-        if (element['completed'] == 'true') {
-          //debugPrint('${element['completed']}');
-          completedTasks.add(element);
-        } else {
-          unCompletedTasks.add(element);
-        }
-        if (element['favorite'] == 'true') {
-          favoriteTasks.add(element);
-        }
-      });
       emit(GetDataState());
     }).catchError((error) {
       debugPrint(error.toString());
     });
   }
 
-  void updateDatabase({
+  void updateCompletedDatabase({
     bool? isCompleted,
+    required int id,
+  }) {
+    database.rawUpdate(
+        'UPDATE $tableName SET completed = ? WHERE id = ?', [
+      '${isCompleted.toString()}',
+      '$id',
+    ]).then((value) {
+      getTodoAppDatabase();
+      emit(DataUpdatedCompleteFieldState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+    });
+  }
+
+void updateFavoriteDatabase({
     bool? isFavorite,
     required int id,
   }) {
     database.rawUpdate(
-        'UPDATE $tableName SET completed = ? , favorite = ? WHERE id = ?', [
-      '${isCompleted.toString()}',
+        'UPDATE $tableName SET favorite = ? WHERE id = ?', [
       '${isFavorite.toString()}',
       '$id',
     ]).then((value) {
       getTodoAppDatabase();
-      emit(DataUpdatedState());
+      emit(DataUpdatedFavoriteFieldState());
     }).catchError((error) {
       debugPrint(error.toString());
     });
   }
 
   void deleteRowTodoAppDatabase({required int id}) {
-    completedTasks = [];
-    unCompletedTasks = [];
-    favoriteTasks = [];
     database.rawDelete('DELETE FROM $tableName WHERE id = ?', ['$id']).then(
         (value) {
       debugPrint('Row deleted');
@@ -157,20 +152,15 @@ class TodoCubit extends Cubit<TodoStates> {
     });
   }
 
-  void deleteTableTodoAppDatabase() async {
-    await database.delete('$tableName').then((value) {
-      debugPrint('table deleted');
-      emit(DeleteDataState());
-      getTodoAppDatabase();
-    });
-  }
-
-  // bool boxChecked = false;
-  //
-  // void isBoxChecked(bool? value) {
-  //   boxChecked = value!;
-  //   emit(BoxCheckedState());
+  // void deleteTableTodoAppDatabase() async {
+  //   await database.delete('$tableName').then((value) {
+  //     debugPrint('table deleted');
+  //     emit(DeleteDataState());
+  //     getTodoAppDatabase();
+  //   });
   // }
+
+
   String selectedDay = DateFormat('EEEEE').format(DateTime.now());
   String selectedDate = DateFormat.yMMMd().format(DateTime.now());
   String convertedSelectedDate = DateFormat.yMd().format(DateTime.now());
@@ -179,10 +169,9 @@ class TodoCubit extends Cubit<TodoStates> {
     selectedDay = DateFormat('EEEEE').format(date);
     selectedDate = DateFormat.yMMMd().format(date); //jul 24,2022
     convertedSelectedDate = DateFormat.yMd().format(date);
-    debugPrint('$selectedDay');
-    debugPrint('$selectedDate');
-    debugPrint('$convertedSelectedDate');
-
+    // debugPrint('$selectedDay');
+    // debugPrint('$selectedDate');
+    // debugPrint('$convertedSelectedDate');
     emit(DayChangedState());
   }
 
@@ -262,3 +251,23 @@ class TodoCubit extends Cubit<TodoStates> {
     notification.requestIOSPermissions();
   }
 }
+// List<Map> completedTasks = [];
+// List<Map> unCompletedTasks = [];
+// List<Map> favoriteTasks = [];
+// allTasks.forEach((element) {
+// if (element['completed'] == 'true') {
+// //debugPrint('${element['completed']}');
+// completedTasks.add(element);
+// } else {
+// unCompletedTasks.add(element);
+// }
+// if (element['favorite'] == 'true') {
+// favoriteTasks.add(element);
+// }
+// });
+// bool boxChecked = false;
+//
+// void isBoxChecked(bool? value) {
+//   boxChecked = value!;
+//   emit(BoxCheckedState());
+// }

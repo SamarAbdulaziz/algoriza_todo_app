@@ -1,16 +1,16 @@
-import 'package:algoriza_todo_app/core/todo_app_cubit/todo_cubit.dart';
 import 'package:algoriza_todo_app/core/util/widgets/my_button.dart';
-import 'package:algoriza_todo_app/core/util/widgets/task_item.dart';
 import 'package:algoriza_todo_app/features/add_task/presentation/pages/add_task.dart';
+import 'package:algoriza_todo_app/features/board/presentation/widgets/Completed_tasks.dart';
+import 'package:algoriza_todo_app/features/board/presentation/widgets/all_tasks.dart';
+import 'package:algoriza_todo_app/features/board/presentation/widgets/favorite_tasks.dart';
+import 'package:algoriza_todo_app/features/board/presentation/widgets/uncompleted_tasks.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class BoardWidget extends StatelessWidget {
   const BoardWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var cubit = TodoCubit.get(context);
     return Column(
       children: [
         const TabBar(
@@ -47,40 +47,10 @@ class BoardWidget extends StatelessWidget {
         Expanded(
           child: TabBarView(
             children: [
-              ListView.builder(
-                itemBuilder: (context, index) {
-                  DateTime date =
-                      DateFormat.jm().parse(cubit.allTasks[index]['startTime']);
-                  var myTime = DateFormat("HH:mm").format(date);
-                  cubit.notification.scheduledNotification(
-                    int.parse(myTime.toString().split(":")[0]),
-                    int.parse(myTime.toString().split(":")[1]),
-                    cubit.allTasks[index],
-                  );
-                  return TaskItem(
-                    taskItem:cubit.allTasks[index],
-                  );
-                },
-                itemCount:cubit.allTasks.length,
-              ),
-              ListView.builder(
-                itemBuilder: (context, index) => TaskItem(
-                  taskItem:cubit.completedTasks[index],
-                ),
-                itemCount:cubit.completedTasks.length,
-              ),
-              ListView.builder(
-                itemBuilder: (context, index) => TaskItem(
-                  taskItem:cubit.unCompletedTasks[index],
-                ),
-                itemCount:cubit.unCompletedTasks.length,
-              ),
-              ListView.builder(
-                itemBuilder: (context, index) => TaskItem(
-                  taskItem:cubit.favoriteTasks[index],
-                ),
-                itemCount:cubit.favoriteTasks.length,
-              ),
+              AllTasksSection(),
+              CompletedTasksSection(),
+              UncompletedTasksSection(),
+              FavoriteTasksSection(),
             ],
           ),
         ),
@@ -98,12 +68,7 @@ class BoardWidget extends StatelessWidget {
             },
           ),
         ),
-        // MyButton(
-        //   text: 'Delete Table',
-        //   onPressed: () {
-        //   cubit.deleteTableTodoAppDatabase();
-        //   },
-        // ),
+
       ],
     );
   }

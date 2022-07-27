@@ -7,8 +7,7 @@ class ScheduleTaskItem extends StatelessWidget {
   final Map taskItem;
   @override
   Widget build(BuildContext context) {
-     var taskDate =taskItem['date'];
-     var cubit=TodoCubit.get(context);
+    var cubit = TodoCubit.get(context);
 
     return Theme(
       data: Theme.of(context).copyWith(
@@ -48,7 +47,7 @@ class ScheduleTaskItem extends StatelessWidget {
             ),
             onChanged: (value) {
               cubit.isCompleted = value!;
-              cubit.updateDatabase(
+              cubit.updateCompletedDatabase(
                   id: taskItem['id'],
                   isCompleted: cubit.isCompleted);
               //cubit.isBoxChecked(value);

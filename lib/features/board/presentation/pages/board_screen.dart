@@ -10,10 +10,8 @@ class BoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit=TodoCubit.get(context);
     return BlocConsumer<TodoCubit, TodoStates>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         return DefaultTabController(
@@ -24,13 +22,14 @@ class BoardScreen extends StatelessWidget {
               title: const Text(
                 'Board',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
               actions: [
-                IconButton(
+
+                TextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -38,13 +37,15 @@ class BoardScreen extends StatelessWidget {
                         builder: (context) => ScheduleScreen(),
                       ),
                     );
-                    cubit.getTodoAppDatabase();
                   },
-                  icon: Icon(
-                    Icons.calendar_today_outlined,
-                    color: appColor,
+                  child: Text(
+                    'Calender',
+                    style: TextStyle(
+                      color:appColor,
+                      fontSize: 18.0,
+                    ),
                   ),
-                )
+                ),
               ],
               backgroundColor: Colors.white,
               elevation: 0.0,
@@ -62,20 +63,18 @@ class BoardScreen extends StatelessWidget {
     );
   }
 }
-// TextButton(
-//   onPressed: () {
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(
-//         builder: (context) => ScheduleScreen(),
-//       ),
-//     );
-//   },
-//   child: Text(
-//     'Calender',
-//     style: TextStyle(
-//       color: Colors.blue,
-//       fontSize: 16.0,
-//     ),
-//   ),
+// IconButton(
+// onPressed: () {
+// Navigator.push(
+// context,
+// MaterialPageRoute(
+// builder: (context) => ScheduleScreen(),
+// ),
+// );
+// cubit.getTodoAppDatabase();
+// },
+// icon: Icon(
+// Icons.calendar_today_outlined,
+// color: appColor,
+// ),
 // ),

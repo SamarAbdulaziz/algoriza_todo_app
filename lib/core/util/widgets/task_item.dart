@@ -34,10 +34,9 @@ class TaskItem extends StatelessWidget {
           activeColor: taskColorsList[taskItem['color']],
           onChanged: (value) {
             TodoCubit.get(context).isCompleted = value!;
-            TodoCubit.get(context).updateDatabase(
+            TodoCubit.get(context).updateCompletedDatabase(
                 id: taskItem['id'],
                 isCompleted: TodoCubit.get(context).isCompleted);
-            //TodoCubit.get(context).isBoxChecked(value);
             debugPrint('$value');
           },
           value:taskItem['completed']=='true'?true:false ,//TodoCubit.get(context).isCompleted,
@@ -46,10 +45,9 @@ class TaskItem extends StatelessWidget {
               itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {
-                        //todo add to completed list
                         TodoCubit.get(context).isCompleted = true;
                         debugPrint('${TodoCubit.get(context).isCompleted}');
-                        TodoCubit.get(context).updateDatabase(
+                        TodoCubit.get(context).updateCompletedDatabase(
                             id: taskItem['id'],
                             isCompleted: TodoCubit.get(context).isCompleted);
                       },
@@ -57,10 +55,9 @@ class TaskItem extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        //todo add to uncompleted list
                         TodoCubit.get(context).isCompleted = false;
                         debugPrint('${TodoCubit.get(context).isCompleted}');
-                        TodoCubit.get(context).updateDatabase(
+                        TodoCubit.get(context).updateCompletedDatabase(
                             id: taskItem['id'],
                             isCompleted: TodoCubit.get(context).isCompleted);
                       },
@@ -68,12 +65,11 @@ class TaskItem extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        //todo add to favorite list
                         TodoCubit.get(context).isFavorite =
                             !TodoCubit.get(context).isFavorite;
                         debugPrint(
                             'favorite: ${TodoCubit.get(context).isFavorite}');
-                        TodoCubit.get(context).updateDatabase(
+                        TodoCubit.get(context).updateFavoriteDatabase(
                             id: taskItem['id'],
                             isFavorite: TodoCubit.get(context).isFavorite);
                       },
