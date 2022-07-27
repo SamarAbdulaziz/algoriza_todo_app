@@ -39,7 +39,7 @@ class TaskItem extends StatelessWidget {
                 isCompleted: TodoCubit.get(context).isCompleted);
             debugPrint('$value');
           },
-          value:taskItem['completed']=='true'?true:false ,//TodoCubit.get(context).isCompleted,
+          value:taskItem['completed']=='true'?true:false ,
           controlAffinity: ListTileControlAffinity.leading,
           secondary: PopupMenuButton(
               itemBuilder: (context) => [

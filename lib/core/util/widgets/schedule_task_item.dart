@@ -3,8 +3,12 @@ import 'package:algoriza_todo_app/core/util/app_colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleTaskItem extends StatelessWidget {
-  const ScheduleTaskItem({Key? key, required this.taskItem}) : super(key: key);
+  const ScheduleTaskItem({
+    Key? key,
+    required this.taskItem,
+  }) : super(key: key);
   final Map taskItem;
+
   @override
   Widget build(BuildContext context) {
     var cubit = TodoCubit.get(context);
@@ -12,9 +16,8 @@ class ScheduleTaskItem extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         checkboxTheme: Theme.of(context).checkboxTheme.copyWith(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0)
-          ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
           side: MaterialStateBorderSide.resolveWith(
                 (states) => BorderSide(
                     width: 1.0,
@@ -42,18 +45,15 @@ class ScheduleTaskItem extends StatelessWidget {
             subtitle: Text(
               taskItem['title'],
               style: TextStyle(
-                  color: Colors.white
-              ),
+                  color: Colors.white),
             ),
             onChanged: (value) {
               cubit.isCompleted = value!;
               cubit.updateCompletedDatabase(
-                  id: taskItem['id'],
-                  isCompleted: cubit.isCompleted);
-              //cubit.isBoxChecked(value);
+                  id: taskItem['id'], isCompleted: cubit.isCompleted);
               debugPrint('$value');
             },
-            value: cubit.isCompleted,
+            value: taskItem['completed'] == 'true' ? true : false,
             controlAffinity: ListTileControlAffinity.trailing,
           ),
         ),
