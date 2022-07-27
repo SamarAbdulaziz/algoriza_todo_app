@@ -2,7 +2,6 @@ import 'package:algoriza_todo_app/core/todo_app_cubit/todo_cubit.dart';
 import 'package:algoriza_todo_app/core/util/app_colors/app_colors.dart';
 import 'package:algoriza_todo_app/core/util/widgets/mt_text_form_feild.dart';
 import 'package:algoriza_todo_app/core/util/widgets/my_button.dart';
-import 'package:algoriza_todo_app/notifications/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -133,6 +132,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                             ).then((value) {
                               cubit.startTimeController.text =
                                   value!.format(context);
+
                             });
                           },
                         ),
@@ -341,11 +341,11 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     Navigator.pop(context);
                     cubit.getTodoAppDatabase();
                   }
-                  // cubit.notification.displayNotification(
-                  //   title:"Hello Notification",
-                  //   subtitle:"Welcome to Flutter",
-                  // );
-                  // notification.scheduledNotification();
+                  cubit.notification.displayNotification(
+                    title:"Hello Notification",
+                    subtitle:"Welcome to Flutter",
+                  );
+                  //cubit.notification.scheduledNotification();
 
                 },
               )

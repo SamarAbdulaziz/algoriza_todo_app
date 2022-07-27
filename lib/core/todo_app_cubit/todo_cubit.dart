@@ -152,15 +152,6 @@ void updateFavoriteDatabase({
     });
   }
 
-  // void deleteTableTodoAppDatabase() async {
-  //   await database.delete('$tableName').then((value) {
-  //     debugPrint('table deleted');
-  //     emit(DeleteDataState());
-  //     getTodoAppDatabase();
-  //   });
-  // }
-
-
   String selectedDay = DateFormat('EEEEE').format(DateTime.now());
   String selectedDate = DateFormat.yMMMd().format(DateTime.now());
   String convertedSelectedDate = DateFormat.yMd().format(DateTime.now());
@@ -213,15 +204,6 @@ void updateFavoriteDatabase({
     emit(RepeatState());
   }
 
-//it didnt work so i used Statefullwidget
-//   int val = 0;
-//
-//   void changeColorInAddTaskScreen(int? value) {
-//     val = value!;
-//     emit(ChangeColorInAddTaskScreen());
-//     print(val.toString());
-//   }
-
   void saveTaskColor(int val) {
     switch(val){
       case 0:
@@ -239,8 +221,6 @@ void updateFavoriteDatabase({
       default:
         taskColor=4;
     }
-    // taskColor = taskColorsList[val].toString();
-    // print('the color $taskColorsList[$val]');
   }
 
   var notification;
@@ -270,4 +250,19 @@ void updateFavoriteDatabase({
 // void isBoxChecked(bool? value) {
 //   boxChecked = value!;
 //   emit(BoxCheckedState());
+// }
+//it didnt work so i used Statefullwidget
+//   int val = 0;
+//
+//   void changeColorInAddTaskScreen(int? value) {
+//     val = value!;
+//     emit(ChangeColorInAddTaskScreen());
+//     print(val.toString());
+//   }
+// void deleteTableTodoAppDatabase() async {
+//   await database.delete('$tableName').then((value) {
+//     debugPrint('table deleted');
+//     emit(DeleteDataState());
+//     getTodoAppDatabase();
+//   });
 // }
