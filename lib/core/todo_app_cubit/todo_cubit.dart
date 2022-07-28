@@ -99,8 +99,6 @@ class TodoCubit extends Cubit<TodoStates> {
   }
 
   List<Map> allTasks = [];
-
-
   void getTodoAppDatabase() async {
     emit(GetDatabaseLoadingState());
     isCompleted = false;

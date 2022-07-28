@@ -108,12 +108,9 @@ class AddTaskWidget extends StatelessWidget {
                             ).then((value) {
                               cubit.startTimeController.text =
                                   value!.format(context);
+                              startTime = DateFormat("hh:mm a")
+                                  .parse(cubit.startTimeController.text);
                             });
-                            // start =
-                            //     DateTime.parse(cubit.startTimeController.text);
-                            startTime = DateFormat("hh:mm a")
-                                .parse(cubit.startTimeController.text);
-
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -152,8 +149,6 @@ class AddTaskWidget extends StatelessWidget {
                             ).then((value) {
                               cubit.endTimeController.text =
                                   value!.format(context);
-                              // end =
-                              //     DateTime.parse(cubit.endTimeController.text);
                               endTime = DateFormat("hh:mm a")
                                   .parse(cubit.endTimeController.text);
                             });
@@ -162,9 +157,22 @@ class AddTaskWidget extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'End Time must not empty';
                             }
-                            if (endTime.hour <= startTime.hour&&endTime.minute<=startTime.minute) {
-                              return 'End time must be after start time';
-                            }
+                            // if (endTime.hour <= startTime.hour&&endTime.minute==startTime.minute)
+                            // {
+                            //   return 'End time must be after start time';
+                            // }
+                            // if(startTime.hour==endTime.hour){
+                            //   if(startTime.minute==endTime.minute){
+                            //     return 'Minutes must be different';
+                            //   }
+                            //   // else if(startTime.minute>=endTime.minute){
+                            //   //   return 'Times must be different';
+                            //   // }
+                            //
+                            // }
+                            // if(startTime.hour>=endTime.hour){
+                            //   return 'End time must be after start time';
+                            // }
                           },
                           hintText: '12:00 PM',
                           suffixIcon: const Icon(Icons.access_time_outlined),
@@ -320,10 +328,10 @@ class AddTaskWidget extends StatelessWidget {
                     Navigator.pop(context);
                     cubit.getTodoAppDatabase();
                   }
-                  cubit.notification.displayNotification(
-                    title: cubit.titleController.text,
-                    subtitle: 'At${cubit.dateController.text}',
-                  );
+                  // cubit.notification.displayNotification(
+                  //   title: cubit.titleController.text,
+                  //   subtitle: 'At${cubit.dateController.text}',
+                  // );
                  // cubit.notification.scheduledNotification();
 
                 },
