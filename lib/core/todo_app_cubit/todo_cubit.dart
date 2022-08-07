@@ -54,6 +54,7 @@ class TodoCubit extends Cubit<TodoStates> {
   TextEditingController remindController = TextEditingController();
   TextEditingController repeatController = TextEditingController();
   int taskColor = 0;
+
   bool isCompleted = false;
   bool isFavorite = false;
 
@@ -78,8 +79,8 @@ class TodoCubit extends Cubit<TodoStates> {
               '"${remindController.text}",'
               '"${repeatController.text}",'
               '"${taskColor}",'
-              '"${isCompleted.toString()}",'
-              '"${isFavorite.toString()}")')
+              '"false",'
+              '"false")')
           .then((value) {
         debugPrint('Data inserted');
         emit(DataInsertedState());
@@ -89,9 +90,6 @@ class TodoCubit extends Cubit<TodoStates> {
         endTimeController.clear();
         remindController.clear();
         repeatController.clear();
-        isCompleted = false;
-        isFavorite = false;
-
       }).catchError((error) {
         debugPrint(error.toString());
       });
@@ -101,8 +99,6 @@ class TodoCubit extends Cubit<TodoStates> {
   List<Map> allTasks = [];
   void getTodoAppDatabase() async {
     emit(GetDatabaseLoadingState());
-    isCompleted = false;
-    isFavorite = false;
     await database.rawQuery('SELECT * FROM $tableName').then((value) {
       allTasks = value;
       debugPrint('$allTasks');

@@ -47,33 +47,31 @@ class TaskItem extends StatelessWidget {
               [
                     PopupMenuItem(
                       onTap: () {
-                        cubit.isCompleted = true;
+                        //cubit.isCompleted = true;
+                        taskItem['completed'] == 'true'
+                            ? cubit.isCompleted = false
+                            : cubit.isCompleted = true;
+
                         debugPrint('${cubit.isCompleted}');
                         cubit.updateCompletedDatabase(
-                            id: taskItem['id'],
+                          id: taskItem['id'],
                           isCompleted: cubit.isCompleted,
                         );
                       },
-                      child: const Text('Completed'),
+                      child: taskItem['completed'] == 'true'
+                          ? const Text('Uncompleted')
+                          : const Text('Completed'),
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        cubit.isCompleted = false;
-                        debugPrint('${cubit.isCompleted}');
-                        cubit.updateCompletedDatabase(
-                            id: taskItem['id'],
-                            isCompleted: cubit.isCompleted,
-                        );
-                      },
-                      child: const Text('Uncompleted'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () {
-                        cubit.isFavorite = !cubit.isFavorite;
+                        //  cubit.isFavorite = !cubit.isFavorite;
+                        //taskItem['favorite']=="true"? taskItem['favorite']="false": taskItem['favorite']="true";
+                        taskItem['favorite'] == 'true'
+                            ? cubit.isFavorite = false
+                            : cubit.isFavorite = true;
                         debugPrint('favorite: ${cubit.isFavorite}');
                         cubit.updateFavoriteDatabase(
-                            id: taskItem['id'],
-                            isFavorite: cubit.isFavorite);
+                            id: taskItem['id'], isFavorite: cubit.isFavorite);
                         cubit.isFavorite
                             ? ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -89,6 +87,9 @@ class TaskItem extends StatelessWidget {
                                   backgroundColor: appColor,
                                   behavior: SnackBarBehavior.floating,
                                   margin: const EdgeInsets.only(bottom: 100.0),
+                                  duration: const Duration(
+                                    seconds: 1,
+                                  ),
                                 ),
                               )
                             : ScaffoldMessenger.of(context).showSnackBar(
@@ -110,15 +111,16 @@ class TaskItem extends StatelessWidget {
                                 ),
                               );
                       },
-                      child: const Text('Favorite'),
+                      child: taskItem['favorite'] == 'true'
+                          ? const Text('Not Favorite')
+                          : const Text('Favorite'),
                     ),
                     PopupMenuItem(
                       onTap: () {
-                        //todo delete item
                         cubit.deleteRowTodoAppDatabase(id: taskItem['id']);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Padding(
+                          const SnackBar(
+                            content: Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Task Deleted',
@@ -129,7 +131,7 @@ class TaskItem extends StatelessWidget {
                             ),
                             backgroundColor: Colors.red,
                             behavior: SnackBarBehavior.floating,
-                            margin: const EdgeInsets.only(bottom: 100.0),
+                            margin: EdgeInsets.only(bottom: 100.0),
                           ),
                         );
                       },
@@ -141,3 +143,14 @@ class TaskItem extends StatelessWidget {
     );
   }
 }
+// PopupMenuItem(
+// onTap: () {
+// cubit.isCompleted = false;
+// debugPrint('${cubit.isCompleted}');
+// cubit.updateCompletedDatabase(
+// id: taskItem['id'],
+// isCompleted: cubit.isCompleted,
+// );
+// },
+// child: const Text('Uncompleted'),
+// ),
