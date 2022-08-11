@@ -203,22 +203,24 @@ void updateFavoriteDatabase({
     emit(ChangeColorInAddTaskState());
   }
   void saveTaskColor(int val) {
-    switch(val){
-      case 0:
-        taskColor=0;
-        break;
-        case 1:
-          taskColor=1;
-          break;
-        case 2:
-          taskColor=2;
-          break;
-          case 3:
-          taskColor=3;
-          break;
-      default:
-        taskColor=4;
-    }
+    // switch(val){
+    //   case 0:
+    //     taskColor=0;
+    //     break;
+    //     case 1:
+    //       taskColor=1;
+    //       break;
+    //     case 2:
+    //       taskColor=2;
+    //       break;
+    //       case 3:
+    //       taskColor=3;
+    //       break;
+    //   default:
+    //     taskColor=4;
+    // }
+    taskColor=val;
+
   }
 
   var notification;

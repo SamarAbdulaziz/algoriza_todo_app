@@ -48,9 +48,9 @@ class ScheduleTaskItem extends StatelessWidget {
                   color: Colors.white),
             ),
             onChanged: (value) {
-              cubit.isCompleted = value!;
+              taskItem['completed'] = value!.toString();
               cubit.updateCompletedDatabase(
-                  id: taskItem['id'], isCompleted: cubit.isCompleted);
+                  id: taskItem['id'], isCompleted:taskItem['completed']);
               debugPrint('$value');
             },
             value: taskItem['completed'] == 'true' ? true : false,

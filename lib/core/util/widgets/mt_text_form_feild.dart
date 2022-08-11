@@ -29,9 +29,18 @@ class MyTextFormField extends StatelessWidget {
       keyboardType: type,
       decoration: InputDecoration(
         hintText: hintText,
-        fillColor: Colors.red,
+        fillColor: Colors.grey[200],
+        filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          borderSide: BorderSide(
+            color: Colors.black87,
+            width: 1,
+          ),
         ),
         suffixIcon: suffixIcon,
       ),

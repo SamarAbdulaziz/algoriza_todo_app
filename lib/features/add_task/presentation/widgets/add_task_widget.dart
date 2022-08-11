@@ -222,6 +222,19 @@ class AddTaskWidget extends StatelessWidget {
                   },
                 ),
               ),
+              // DropdownButtonFormField(
+              //   items: cubit.remindList
+              //       .map<DropdownMenuItem<String>>((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              //   onChanged: (String? value) {
+              //     cubit.setReminder(value!);
+              //   },
+              //
+              // ),
               const SizedBox(
                 height: 10.0,
               ),
