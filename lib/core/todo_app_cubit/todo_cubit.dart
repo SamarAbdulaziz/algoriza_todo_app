@@ -204,6 +204,7 @@ void updateFavoriteDatabase({
   }
   void saveTaskColor(int val) {
     taskColor=val;
+
   }
 
   var notification;
